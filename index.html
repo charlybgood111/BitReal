@@ -580,6 +580,8 @@ body[data-screen="perfil"] .phone-frame {
   background: var(--card2);
   color: var(--text);
 }
+.period-btn { transition: background 0.15s ease, transform 0.12s ease; }
+.period-btn:active { transform: scale(0.92); }
 
 /* Action buttons — Bitstack style */
 .action-row {
@@ -613,6 +615,10 @@ body[data-screen="perfil"] .phone-frame {
   transition: opacity 0.15s;
 }
 .act-btn-sec:hover { opacity: 0.75; }
+.act-btn-main:active, .act-btn-sec:active { transform: scale(0.97); }
+.act-btn-pix { transition: opacity 0.15s, transform 0.15s; }
+.act-btn-pix:hover { opacity: 0.85; }
+.act-btn-pix:active { transform: scale(0.97); }
 .act-btn-icon {
   width: 48px; height: 48px;
   background: var(--card2);
@@ -710,6 +716,7 @@ body[data-screen="perfil"] .phone-frame {
   position: relative;
   cursor: pointer;
   flex-shrink: 0;
+  transition: background 0.25s ease;
 }
 .toggle-wrap::after {
   content: '';
@@ -719,7 +726,10 @@ body[data-screen="perfil"] .phone-frame {
   border-radius: 50%;
   top: 3px; right: 3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: right 0.25s ease, left 0.25s ease;
 }
+.toggle-wrap.off { background: #ccc !important; }
+.toggle-wrap.off::after { right: auto; left: 3px; }
 
 .mult-section {
   padding: 16px 20px;
@@ -868,6 +878,14 @@ body[data-screen="perfil"] .phone-frame {
   cursor: pointer;
 }
 .preset.active { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+.preset { transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease; }
+.preset:active { transform: scale(0.94); }
+.freq-opt { transition: background 0.15s ease; }
+.freq-opt:active { background: var(--green-dim); }
+.mult-chip { transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease; cursor: pointer; }
+.mult-chip:active { transform: scale(0.94); }
+.slider-thumb { cursor: grab; }
+.slider-thumb:active { cursor: grabbing; }
 
 .proj-card {
   margin: 0 16px 16px;
@@ -2135,6 +2153,9 @@ body, .screen, .onboard-wrap,
 button {
   color: var(--text) !important;
 }
+.btn-new-recipient { color: #fff !important; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.btn-new-recipient:hover { box-shadow: 0 8px 20px rgba(247,147,26,0.45); }
+.btn-new-recipient:active { transform: scale(0.97); box-shadow: 0 3px 10px rgba(247,147,26,0.3); }
 
 /* ── BOTTOM NAV: adaptive ── */
 .nav-item { color: var(--text2) !important; }
@@ -2212,6 +2233,7 @@ button {
 #screen-arrondi .mult-chip.active .mult-num { color: #F7931A !important; }
 #screen-arrondi .mult-chip.active .mult-tag { color: var(--text) !important; }
 #screen-arrondi .toggle-wrap { background: #F7931A !important; }
+#screen-arrondi .toggle-wrap.off { background: #ccc !important; }
 #screen-arrondi .ex-total {
   background: rgba(247,147,26,0.08) !important;
   border-color: rgba(247,147,26,0.3) !important;
@@ -2221,7 +2243,7 @@ button {
 #screen-arrondi .ex-right { color: #F7931A !important; }
 #screen-arrondi .btn-green {
   border-color: #009C3B !important;
-  color: var(--text) !important;
+  color: #fff !important;
 }
 /* wt-value orange */
 #screen-arrondi .wt-value { color: #F7931A !important; }
@@ -2624,26 +2646,51 @@ body {
 <body>
 
 <style>
-#br-flag-deco {
-  position: fixed;
-  left: -60px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 420px;
-  height: 294px;
-  opacity: 0.10;
-  border-radius: 24px;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(2px);
-  transition: opacity 0.6s ease;
-}
-/* Plus visible sur l'écran d'accueil */
-body[data-screen="onboard"] #br-flag-deco { opacity: 0.15; filter: blur(1px); }
-body[data-screen="dashboard"] #br-flag-deco { opacity: 0.08; }
-body[data-screen="arrondi"] #br-flag-deco { opacity: 0.07; }
+/* Bannière referral — contour orange marqué */
+.referral-banner { border: 2px solid #F7931A !important; }
 
-/* Bordures latérales plus intenses */
+/* Section Geral — effet de survol vert sur chaque ligne */
+#screen-perfil .card .row-item { transition: background 0.15s ease; }
+#screen-perfil .card .row-item:hover { background: rgba(0,156,59,0.08); }
+
+/* Taxa BitReal — bleu au lieu de vert */
+#screen-perfil .fee-card {
+  background: linear-gradient(135deg, rgba(0,39,118,0.08), rgba(0,39,118,0.03)) !important;
+  border-color: rgba(0,39,118,0.3) !important;
+}
+#screen-perfil .fee-val { color: #002776 !important; }
+
+/* Avatar cliquable → profil */
+.avatar-circle { transition: transform 0.15s ease; }
+.avatar-circle:active { transform: scale(0.92); }
+
+/* Planos de poupanca — cartes cliquables, contour orange */
+.plan-card-clickable {
+  border: 2px solid #F7931A !important;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.plan-card-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(247,147,26,0.25);
+  background: rgba(247,147,26,0.06);
+}
+.plan-card-clickable:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(247,147,26,0.2);
+}
+
+/* Icone bannière referral (Ganhe R$10) — orange */
+.ref-icon svg { stroke: #F7931A !important; color: #F7931A !important; }
+
+/* Suppression des dégradés d'ambiance latéraux */
+body::before { content: none !important; }
+
+/* Icones "Frequencia" (Compra Recorrente) — noir par défaut, orange si actif */
+#screen-dca .freq-emoji svg { stroke: #0D0D14 !important; color: #0D0D14 !important; }
+#screen-dca .freq-opt.active .freq-emoji svg { stroke: #F7931A !important; color: #F7931A !important; }
+
+/* Bordures latérales (liserés Brésil) */
 body {
   border-left: 4px solid transparent !important;
   border-right: 4px solid transparent !important;
@@ -2655,50 +2702,7 @@ body {
     #009C3B 100%
   ) 1 !important;
 }
-
-/* Lueurs plus intenses */
-body::before {
-  background:
-    radial-gradient(ellipse 45% 50% at 0% 30%, rgba(0,156,59,0.14) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 50% at 100% 30%, rgba(255,223,0,0.10) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 50% at 0% 80%, rgba(255,223,0,0.09) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 50% at 100% 80%, rgba(0,39,118,0.14) 0%, transparent 65%) !important;
-}
-body[data-screen="onboard"]::before {
-  background:
-    radial-gradient(ellipse 55% 60% at 8% 50%, rgba(0,156,59,0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 50% at 92% 50%, rgba(255,223,0,0.10) 0%, transparent 65%) !important;
-}
-
-/* 🇧🇷 Drapeau en footer */
-#br-flag-footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 900px;
-  height: 80px;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-#br-flag-footer img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  object-position: center 40%;
-  opacity: 0.18;
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.8) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.8) 100%);
-  filter: blur(1px);
-}
 </style>
-
-<!-- 🇧🇷 Drapeau footer -->
-<div id="br-flag-footer" aria-hidden="true">
-  <img src="brasil_flag.jpg" alt=""/>
-</div>
 
 <div id="mobile-screen-nav">
   <button onclick="switchScreen('onboard')" class="active" id="mnav-onboard">1</button>
@@ -2758,8 +2762,8 @@ body[data-screen="onboard"]::before {
           <div><div class="of-title">Aprenda e ganhe <span class="sats">sats</span></div><div class="of-sub">Exclusivo Bitreal — unico no Brasil!</div></div>
         </div>
       </div>
-      <button class="btn-green" style="background:#009C3B !important;color:#fff !important;border-color:#009C3B !important;font-size:17px;">Comecar agora — e gratis!</button>
-      <button class="btn-outline" style="background:#F7931A !important;color:#fff !important;border-color:#F7931A !important;font-weight:700;">Ja tenho uma conta</button>
+      <button class="btn-green" onclick="switchScreen('dashboard')" style="background:#009C3B !important;color:#fff !important;border-color:#009C3B !important;font-size:17px;cursor:pointer;">Comecar agora — e gratis!</button>
+      <button class="btn-outline" onclick="switchScreen('dashboard')" style="background:#F7931A !important;color:#fff !important;border-color:#F7931A !important;font-weight:700;cursor:pointer;">Ja tenho uma conta</button>
     </div>
   </div>
 
@@ -2785,25 +2789,25 @@ body[data-screen="onboard"]::before {
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <div class="referral-pill">🎁 Ganhe <span class="currency">R$</span>10</div>
-        <div class="avatar-circle">SN</div>
+        <div class="avatar-circle" onclick="switchScreen('perfil')" style="cursor:pointer;">SN</div>
       </div>
     </div>
 
     <div class="chart-area">
       <div class="chart-balance-label">Balance total</div>
       <div class="chart-balance"><span class="currency">R$</span> <span style="color:var(--text)">1.847,32</span></div>
-      <div style="display:flex;gap:16px;margin-top:6px;align-items:center">
-        <div style="display:flex;flex-direction:column;gap:1px">
+      <div style="display:flex;gap:28px;margin-top:16px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:5px">
           <span style="font-size:10px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Poupanca</span>
           <span style="font-size:15px;font-weight:800;color:#009C3B"><span style="font-size:11px;color:#009C3B">R$</span> <span style="color:var(--text)">1.841,32</span></span>
         </div>
-        <div style="width:1px;height:28px;background:var(--border)"></div>
-        <div style="display:flex;flex-direction:column;gap:1px">
+        <div style="width:1px;height:32px;background:var(--border)"></div>
+        <div style="display:flex;flex-direction:column;gap:5px">
           <span style="font-size:10px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Recompensas</span>
           <span style="font-size:15px;font-weight:800;color:#009C3B">6.000 <span style="font-size:11px">sats</span></span>
         </div>
       </div>
-      <div class="perf-pill">+42,7% <span style="color:var(--text2);font-weight:500">desde o inicio</span></div>
+      <div class="perf-pill" style="margin-top:16px;">+42,7% <span style="color:var(--text2);font-weight:500">desde o inicio</span></div>
       <svg class="svg-chart" viewBox="0 0 300 80" preserveAspectRatio="none">
         <defs>
           <linearGradient id="ggrad" x1="0" y1="0" x2="0" y2="1">
@@ -2817,26 +2821,27 @@ body[data-screen="onboard"]::before {
     </div>
 
     <div class="period-row">
-      <div class="period-btn">1D</div>
-      <div class="period-btn">1S</div>
-      <div class="period-btn">1M</div>
-      <div class="period-btn">3M</div>
-      <div class="period-btn">1A</div>
-      <div class="period-btn active">TUDO</div>
+      <div class="period-btn" onclick="selectPeriod(this)">1D</div>
+      <div class="period-btn" onclick="selectPeriod(this)">1S</div>
+      <div class="period-btn" onclick="selectPeriod(this)">1M</div>
+      <div class="period-btn" onclick="selectPeriod(this)">3M</div>
+      <div class="period-btn" onclick="selectPeriod(this)">1A</div>
+      <div class="period-btn active" onclick="selectPeriod(this)">TUDO</div>
     </div>
 
-    <div class="action-row">
-      <button class="act-btn-main">Comprar</button>
-      <button class="act-btn-sec">Vender</button>
-      <div class="act-btn-icon">↕</div>
+    <div class="action-row" style="justify-content:center;">
+      <button class="act-btn-main" onclick="alert('Comprar Bitcoin — em breve!')" style="background:#F7931A !important;color:#fff !important;border-color:#F7931A !important;cursor:pointer;">Comprar</button>
+      <button class="act-btn-sec" onclick="alert('Vender Bitcoin — em breve!')" style="background:#009C3B !important;color:#fff !important;border-color:#009C3B !important;cursor:pointer;">Vender</button>
     </div>
 
     <div class="action-row" style="margin-top:8px;">
-      <button class="act-btn-pix" style="width:100%;padding:10px 16px;border:2px solid #009C3B;background:transparent;color:#009C3B;border-radius:10px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;">
+      <button class="act-btn-pix" onclick="alert('Conectar cartão bancário — em breve!')" style="width:100%;padding:10px 16px;border:2px solid #002776;background:#002776;color:#fff !important;border-radius:10px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L6.5 7.5H9.5V11H6.5L2 12L6.5 13H9.5V16.5H6.5L12 22L17.5 16.5H14.5V13H17.5L22 12L17.5 11H14.5V7.5H17.5L12 2Z" fill="#009C3B"/>
+          <rect x="2" y="5" width="20" height="14" rx="2.5" stroke="#fff" stroke-width="1.8"/>
+          <line x1="2" y1="10" x2="22" y2="10" stroke="#fff" stroke-width="1.8"/>
+          <line x1="5.5" y1="15" x2="9.5" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
-        Depositar via PIX
+        Conecte seu cartão bancário
       </button>
     </div>
 
@@ -2859,13 +2864,13 @@ body[data-screen="onboard"]::before {
 
     <div class="section-label">Planos de poupanca</div>
     <div class="plans-grid">
-      <div class="plan-card">
+      <div class="plan-card plan-card-clickable" onclick="switchScreen('arrondi')">
         <div class="plan-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
         <div class="plan-name">Arredondamento</div>
         <div class="plan-status-on">✓ Ativo</div>
         <div class="plan-sub">x2 multiplicador</div>
       </div>
-      <div class="plan-card">
+      <div class="plan-card plan-card-clickable" onclick="switchScreen('dca')">
         <div class="plan-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div class="plan-name">Recorrente</div>
         <div class="plan-val"><span class="currency">R$</span>50</div>
@@ -2877,7 +2882,7 @@ body[data-screen="onboard"]::before {
     <div class="bottom-nav">
       <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -2902,43 +2907,43 @@ body[data-screen="onboard"]::before {
     <div class="arro-hero">
       <div class="arro-status">
         <div>
-          <div style="font-size:14px;font-weight:600;color:var(--text)">Ativo</div>
+          <div id="arro-status-label" style="font-size:14px;font-weight:600;color:var(--text)">Ativo</div>
           <div style="font-size:12px;color:var(--text2)">Processado toda segunda-feira</div>
         </div>
-        <div class="toggle-wrap"></div>
+        <div class="toggle-wrap" id="arro-toggle" data-on="1" onclick="toggleArrondi(this)"></div>
       </div>
     </div>
 
     <div class="mult-section">
       <div class="mult-label">Multiplicador de arredondamento</div>
       <div class="mult-grid">
-        <div class="mult-chip"><div class="mult-num">x1</div><div class="mult-tag">Normal</div></div>
-        <div class="mult-chip active"><div class="mult-num">x2</div><div class="mult-tag">Duplo</div></div>
-        <div class="mult-chip"><div class="mult-num">x5</div><div class="mult-tag">Turbo</div></div>
-        <div class="mult-chip"><div class="mult-num">x10</div><div class="mult-tag">Maximo</div></div>
+        <div class="mult-chip" onclick="selectMult(1, this)"><div class="mult-num">x1</div><div class="mult-tag">Normal</div></div>
+        <div class="mult-chip active" onclick="selectMult(2, this)"><div class="mult-num">x2</div><div class="mult-tag">Duplo</div></div>
+        <div class="mult-chip" onclick="selectMult(5, this)"><div class="mult-num">x5</div><div class="mult-tag">Turbo</div></div>
+        <div class="mult-chip" onclick="selectMult(10, this)"><div class="mult-num">x10</div><div class="mult-tag">Maximo</div></div>
       </div>
     </div>
 
     <div class="example-section">
-      <div class="ex-title">Exemplo desta semana (x2)</div>
-      <div class="ex-row"><div class="ex-left">Cafe — <span class="currency">R$</span>4,70</div><div class="ex-right">+ <span class="currency">R$</span>0,60</div></div>
-      <div class="ex-row"><div class="ex-left">Transporte — <span class="currency">R$</span>4,30</div><div class="ex-right">+ <span class="currency">R$</span>1,40</div></div>
-      <div class="ex-row"><div class="ex-left">Almoco — <span class="currency">R$</span>23,50</div><div class="ex-right">+ <span class="currency">R$</span>1,00</div></div>
-      <div class="ex-row"><div class="ex-left">Mercado — <span class="currency">R$</span>87,20</div><div class="ex-right">+ <span class="currency">R$</span>1,60</div></div>
+      <div class="ex-title" id="ex-title">Exemplo desta semana (x2)</div>
+      <div class="ex-row"><div class="ex-left">Cafe — <span class="currency">R$</span>4,70</div><div class="ex-right" id="ex-val-0">+ <span class="currency">R$</span>0,60</div></div>
+      <div class="ex-row"><div class="ex-left">Transporte — <span class="currency">R$</span>4,30</div><div class="ex-right" id="ex-val-1">+ <span class="currency">R$</span>1,40</div></div>
+      <div class="ex-row"><div class="ex-left">Almoco — <span class="currency">R$</span>23,50</div><div class="ex-right" id="ex-val-2">+ <span class="currency">R$</span>1,00</div></div>
+      <div class="ex-row"><div class="ex-left">Mercado — <span class="currency">R$</span>87,20</div><div class="ex-right" id="ex-val-3">+ <span class="currency">R$</span>1,60</div></div>
       <div class="ex-total">
         <div class="ex-total-label">Total desta semana</div>
-        <div class="ex-total-val" style="color:var(--text)"><span class="currency">R$</span> 4,60 em <span style="color:#F7931A;font-weight:700">BTC</span></div>
+        <div class="ex-total-val" style="color:var(--text)"><span class="currency">R$</span> <span id="ex-total-val">4,60</span> em <span style="color:#F7931A;font-weight:700">BTC</span></div>
       </div>
     </div>
 
     <div style="padding:0 16px 16px">
-      <button class="btn-green">Salvar configuracao</button>
+      <button class="btn-green" onclick="alert('Configuracao salva com sucesso!')" style="cursor:pointer;">Salvar configuracao</button>
     </div>
 
     <div class="bottom-nav">
       <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -2962,9 +2967,16 @@ body[data-screen="onboard"]::before {
     <div class="page-title">Compra Recorrente</div>
 
     <div class="dca-active-card">
-      <div class="active-dot"><div class="pulse"></div>Ativo</div>
-      <div class="dca-val"><span class="currency">R$</span> <span style="color:var(--text)">50,00</span></div>
-      <div class="dca-freq-row">Todo domingo as 09:00</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div class="active-dot"><div class="pulse" id="dca-pulse"></div><span id="dca-active-label">Ativo</span></div>
+        <div id="dca-toggle" data-on="1"
+          onclick="toggleDca(this)"
+          style="position:relative; width:46px; height:26px; background:#F7931A; border-radius:13px; flex-shrink:0; cursor:pointer; transition: background 0.25s ease;">
+          <div class="dca-toggle-knob" style="position:absolute; top:3px; right:3px; left:auto; width:20px; height:20px; background:#fff; border-radius:50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.25s ease;"></div>
+        </div>
+      </div>
+      <div class="dca-val"><span class="currency">R$</span> <span id="dca-top-val" style="color:var(--text)">50,00</span></div>
+      <div class="dca-freq-row" id="dca-freq-row">Todo domingo as 09:00</div>
       <div class="dca-stats">
         <div class="dca-stat"><div class="dca-stat-label">Proxima compra</div><div class="dca-stat-val">Dom, 13 Abr</div></div>
         <div class="dca-stat"><div class="dca-stat-label">Total investido</div><div class="dca-stat-val"><span class="currency">R$</span>1.150</div></div>
@@ -2975,9 +2987,9 @@ body[data-screen="onboard"]::before {
     <div class="freq-card">
       <div class="freq-card-title">Frequencia</div>
       <div class="freq-options">
-        <div class="freq-opt"><div class="freq-emoji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/></svg></div><div class="freq-name">Diario</div></div>
-        <div class="freq-opt active"><div class="freq-emoji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg></div><div class="freq-name">Semanal</div></div>
-        <div class="freq-opt"><div class="freq-emoji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><rect x="8" y="14" width="8" height="4" rx="1"/></svg></div><div class="freq-name">Mensal</div></div>
+        <div class="freq-opt" onclick="selectFreqOpt(0, this)"><div class="freq-emoji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/></svg></div><div class="freq-name">Diario</div></div>
+        <div class="freq-opt active" onclick="selectFreqOpt(1, this)"><div class="freq-emoji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg></div><div class="freq-name">Semanal</div></div>
+        <div class="freq-opt" onclick="selectFreqOpt(2, this)"><div class="freq-emoji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><rect x="8" y="14" width="8" height="4" rx="1"/></svg></div><div class="freq-name">Mensal</div></div>
       </div>
     </div>
 
@@ -3036,51 +3048,51 @@ body[data-screen="onboard"]::before {
     </div>
 
     <div class="amount-card">
-      <div class="amount-label">Valor por semana</div>
-      <div class="amount-val"><span class="currency">R$</span> <span style="color:var(--text)">50,00</span></div>
-      <div class="slider-track"><div class="slider-fill"></div><div class="slider-thumb"></div></div>
+      <div class="amount-label" id="dca-amount-label">Valor por semana</div>
+      <div class="amount-val"><span class="currency">R$</span> <span id="dca-amount-num" style="color:var(--text)">50,00</span></div>
+      <div class="slider-track" id="dca-slider-track" onclick="dcaSliderClick(event)"><div class="slider-fill" id="dca-slider-fill"></div><div class="slider-thumb" id="dca-slider-thumb"></div></div>
       <div class="presets">
-        <div class="preset"><span class="currency">R$</span><span style="color:var(--text)">5</span></div>
-        <div class="preset"><span class="currency">R$</span><span style="color:var(--text)">25</span></div>
-        <div class="preset active"><span class="currency">R$</span><span style="color:var(--text)">50</span></div>
-        <div class="preset"><span class="currency">R$</span><span style="color:var(--text)">100</span></div>
-        <div class="preset"><span class="currency">R$</span><span style="color:var(--text)">500</span></div>
+        <div class="preset" onclick="selectDcaPreset(0, this)"><span class="currency">R$</span><span style="color:var(--text)">5</span></div>
+        <div class="preset" onclick="selectDcaPreset(1, this)"><span class="currency">R$</span><span style="color:var(--text)">25</span></div>
+        <div class="preset active" onclick="selectDcaPreset(2, this)"><span class="currency">R$</span><span style="color:var(--text)">50</span></div>
+        <div class="preset" onclick="selectDcaPreset(3, this)"><span class="currency">R$</span><span style="color:var(--text)">100</span></div>
+        <div class="preset" onclick="selectDcaPreset(4, this)"><span class="currency">R$</span><span style="color:var(--text)">500</span></div>
       </div>
     </div>
 
     <div class="proj-card">
       <div class="proj-header">Projecao de patrimonio</div>
-      <div class="proj-row-item"><div class="proj-period">Em 6 meses</div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#F7931A">117.000 <span style="font-size:11px">sats</span></div><div style="font-size:11px;color:var(--text);font-weight:500">0.00117 BTC</div></div></div>
-      <div class="proj-row-item"><div class="proj-period">Em 1 ano</div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#F7931A">234.000 <span style="font-size:11px">sats</span></div><div style="font-size:11px;color:var(--text);font-weight:500">0.00234 BTC</div></div></div>
-      <div class="proj-row-item"><div class="proj-period">Em 5 anos</div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#F7931A">1.170.000 <span style="font-size:11px">sats</span></div><div style="font-size:11px;color:var(--text);font-weight:500">0.01170 BTC</div></div></div>
+      <div class="proj-row-item"><div class="proj-period">Em 6 meses</div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#F7931A"><span id="proj-sats-0">117.000</span> <span style="font-size:11px">sats</span></div><div style="font-size:11px;color:var(--text);font-weight:500"><span id="proj-btc-0">0.00117</span> BTC</div></div></div>
+      <div class="proj-row-item"><div class="proj-period">Em 1 ano</div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#F7931A"><span id="proj-sats-1">234.000</span> <span style="font-size:11px">sats</span></div><div style="font-size:11px;color:var(--text);font-weight:500"><span id="proj-btc-1">0.00234</span> BTC</div></div></div>
+      <div class="proj-row-item"><div class="proj-period">Em 5 anos</div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#F7931A"><span id="proj-sats-2">1.170.000</span> <span style="font-size:11px">sats</span></div><div style="font-size:11px;color:var(--text);font-weight:500"><span id="proj-btc-2">0.01170</span> BTC</div></div></div>
     </div>
 
     <div style="padding:0 16px 12px">
       <div style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Método de pagamento</div>
       <div style="display:flex;gap:8px;">
-        <div style="flex:1;padding:10px;border:2px solid #009C3B;border-radius:10px;text-align:center;background:rgba(0,156,59,0.08);">
+        <div id="paym-pix" onclick="selectPaymentMethod('pix')" style="flex:1;padding:10px;border:2px solid #009C3B;border-radius:10px;text-align:center;background:rgba(0,156,59,0.08);cursor:pointer;transition:transform 0.12s ease;">
           <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6.5 7.5H9.5V11H6.5L2 12L6.5 13H9.5V16.5H6.5L12 22L17.5 16.5H14.5V13H17.5L22 12L17.5 11H14.5V7.5H17.5L12 2Z" fill="#009C3B"/></svg>
-            <span style="font-size:13px;font-weight:700;color:#009C3B;">PIX</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6.5 7.5H9.5V11H6.5L2 12L6.5 13H9.5V16.5H6.5L12 22L17.5 16.5H14.5V13H17.5L22 12L17.5 11H14.5V7.5H17.5L12 2Z" fill="#009C3B" id="paym-pix-icon"/></svg>
+            <span style="font-size:13px;font-weight:700;color:#009C3B;" id="paym-pix-label">PIX</span>
           </div>
-          <div style="font-size:10px;color:#009C3B;margin-top:3px;font-weight:600;">Instantâneo ✓</div>
+          <div style="font-size:10px;color:#009C3B;margin-top:3px;font-weight:600;" id="paym-pix-sub">Instantâneo ✓</div>
         </div>
-        <div style="flex:1;padding:10px;border:2px solid var(--border);border-radius:10px;text-align:center;">
+        <div id="paym-card" onclick="selectPaymentMethod('card')" style="flex:1;padding:10px;border:2px solid var(--border);border-radius:10px;text-align:center;cursor:pointer;transition:transform 0.12s ease;">
           <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            <span style="font-size:13px;font-weight:700;color:var(--text2);">Cartão</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="paym-card-icon"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <span style="font-size:13px;font-weight:700;color:var(--text2);" id="paym-card-label">Cartão</span>
           </div>
-          <div style="font-size:10px;color:var(--text2);margin-top:3px;">1-2 dias úteis</div>
+          <div style="font-size:10px;color:var(--text2);margin-top:3px;" id="paym-card-sub">1-2 dias úteis</div>
         </div>
       </div>
     </div>
 
-    <div style="padding:0 16px 16px"><button class="btn-green">Salvar configuracao</button></div>
+    <div style="padding:0 16px 16px"><button class="btn-green" onclick="alert('Configuracao salva com sucesso!')" style="cursor:pointer;">Salvar configuracao</button></div>
 
     <div class="bottom-nav">
       <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -3175,7 +3187,7 @@ body[data-screen="onboard"]::before {
     <div class="bottom-nav">
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -3246,7 +3258,7 @@ body[data-screen="onboard"]::before {
     <div class="bottom-nav">
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -3309,7 +3321,7 @@ body[data-screen="onboard"]::before {
     <div class="bottom-nav">
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -3345,12 +3357,12 @@ body[data-screen="onboard"]::before {
     <div style="padding: 20px 24px 0;">
       <div style="background: var(--card2); border-radius: 14px; padding: 14px 16px; display:flex; align-items:center; gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
-        <span style="color: #999; font-size: 15px;">Buscar destinatario</span>
+        <input type="text" placeholder="Buscar destinatario" style="background:transparent; border:none; outline:none; color: var(--text); font-size: 15px; font-family:inherit; flex:1; width:100%;">
       </div>
     </div>
 
     <div style="padding: 16px 24px 0;">
-      <button style="width:100%; background: linear-gradient(135deg, #F7931A, #E07B0E); color:#fff; border:none; border-radius: 999px; padding: 18px; font-size: 16px; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow: 0 6px 16px rgba(247,147,26,0.35); cursor:pointer; font-family:inherit;">
+      <button class="btn-new-recipient" onclick="alert('Buscar destinatario — em breve!')" style="width:100%; background: linear-gradient(135deg, #F7931A, #E07B0E); border:none; border-radius: 16px; padding: 15px 18px; font-size: 16px; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow: 0 6px 16px rgba(247,147,26,0.35); cursor:pointer; font-family:inherit;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Novo destinatario
       </button>
@@ -3392,7 +3404,7 @@ body[data-screen="onboard"]::before {
     <div class="bottom-nav">
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -3428,7 +3440,7 @@ body[data-screen="onboard"]::before {
     <div style="padding: 20px 24px 0;">
       <div style="background: var(--card2); border-radius: 14px; padding: 14px 16px; display:flex; align-items:center; gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
-        <span style="color: #999; font-size: 15px;">Buscar transacao</span>
+        <input type="text" placeholder="Buscar transacao" style="background:transparent; border:none; outline:none; color: var(--text); font-size: 15px; font-family:inherit; flex:1; width:100%;">
       </div>
     </div>
 
@@ -3574,7 +3586,7 @@ body[data-screen="onboard"]::before {
     <div class="bottom-nav">
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span>Poupanca</span></div>
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><span>Aprender</span></div>
-      <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><span>Recompensas</span></div>
+      
       <div class="nav-item"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg></div><span>Enviar</span></div>
       <div class="nav-item active"><div class="nav-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Atividade</span></div>
     </div>
@@ -3665,6 +3677,144 @@ function switchScreen(name, tabEl) {
   } catch (e) {
     dbg('ERR ' + (e && e.message ? e.message : e));
   }
+}
+
+function selectPaymentMethod(method) {
+  var pix = document.getElementById('paym-pix');
+  var card = document.getElementById('paym-card');
+  var pixIcon = document.getElementById('paym-pix-icon');
+  var pixLabel = document.getElementById('paym-pix-label');
+  var pixSub = document.getElementById('paym-pix-sub');
+  var cardIcon = document.getElementById('paym-card-icon');
+  var cardLabel = document.getElementById('paym-card-label');
+  var cardSub = document.getElementById('paym-card-sub');
+  if (method === 'pix') {
+    pix.style.border = '2px solid #009C3B';
+    pix.style.background = 'rgba(0,156,59,0.08)';
+    pixIcon.setAttribute('fill', '#009C3B');
+    pixLabel.style.color = '#009C3B';
+    pixSub.style.color = '#009C3B';
+    card.style.border = '2px solid var(--border)';
+    card.style.background = 'transparent';
+    cardIcon.style.stroke = 'currentColor';
+    cardLabel.style.color = 'var(--text2)';
+    cardSub.style.color = 'var(--text2)';
+  } else {
+    card.style.border = '2px solid #009C3B';
+    card.style.background = 'rgba(0,156,59,0.08)';
+    cardIcon.style.stroke = '#009C3B';
+    cardLabel.style.color = '#009C3B';
+    cardSub.style.color = '#009C3B';
+    pix.style.border = '2px solid var(--border)';
+    pix.style.background = 'transparent';
+    pixIcon.setAttribute('fill', 'currentColor');
+    pixLabel.style.color = 'var(--text2)';
+    pixSub.style.color = 'var(--text2)';
+  }
+}
+
+function selectPeriod(el) {
+  var row = el.parentElement;
+  row.querySelectorAll('.period-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+function toggleDca(el) {
+  var on = el.dataset.on === '1';
+  on = !on;
+  el.dataset.on = on ? '1' : '0';
+  el.style.background = on ? '#F7931A' : '#ccc';
+  var knob = el.querySelector('.dca-toggle-knob');
+  if (knob) {
+    knob.style.right = on ? '3px' : 'auto';
+    knob.style.left = on ? 'auto' : '3px';
+  }
+  var label = document.getElementById('dca-active-label');
+  if (label) label.textContent = on ? 'Ativo' : 'Inativo';
+  var pulse = document.getElementById('dca-pulse');
+  if (pulse) pulse.style.opacity = on ? '1' : '0.3';
+}
+
+function toggleArrondi(el) {
+  var on = el.dataset.on === '1';
+  on = !on;
+  el.dataset.on = on ? '1' : '0';
+  el.classList.toggle('off', !on);
+  var label = document.getElementById('arro-status-label');
+  if (label) label.textContent = on ? 'Ativo' : 'Inativo';
+}
+
+// ── Multiplicador de arredondamento (interativo) ──
+var arroBase = [0.30, 0.70, 0.50, 0.80]; // valores base (x1) por item
+function fmtBR(n) { return n.toFixed(2).replace('.', ','); }
+function selectMult(n, el) {
+  document.querySelectorAll('#screen-arrondi .mult-chip').forEach(function(c) { c.classList.remove('active'); });
+  el.classList.add('active');
+  var total = 0;
+  arroBase.forEach(function(base, i) {
+    var val = base * n;
+    total += val;
+    var target = document.getElementById('ex-val-' + i);
+    if (target) target.innerHTML = '+ <span class="currency">R$</span>' + fmtBR(val);
+  });
+  var title = document.getElementById('ex-title');
+  if (title) title.textContent = 'Exemplo desta semana (x' + n + ')';
+  var totalEl = document.getElementById('ex-total-val');
+  if (totalEl) totalEl.textContent = fmtBR(total);
+}
+
+// ── Frequencia de compra recorrente (interativo) ──
+var freqLabels = ['dia', 'semana', 'mes'];
+var freqRowTexts = ['Todos os dias as 09:00', 'Todo domingo as 09:00', 'Todo dia 1 as 09:00'];
+function selectFreqOpt(idx, el) {
+  document.querySelectorAll('#screen-dca .freq-opt').forEach(function(o) { o.classList.remove('active'); });
+  el.classList.add('active');
+  var label = document.getElementById('dca-amount-label');
+  if (label) label.textContent = 'Valor por ' + freqLabels[idx];
+  var freqRow = document.getElementById('dca-freq-row');
+  if (freqRow) freqRow.textContent = freqRowTexts[idx];
+}
+
+// ── Valor por semana (presets + slider interativos) ──
+var dcaAmounts = [5, 25, 50, 100, 500];
+var dcaBaseProj = [
+  { sats: 117000, btc: 0.00117 },
+  { sats: 234000, btc: 0.00234 },
+  { sats: 1170000, btc: 0.01170 }
+];
+function fmtSats(n) {
+  return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+function selectDcaPreset(idx, el) {
+  var val = dcaAmounts[idx];
+  document.querySelectorAll('#screen-dca .preset').forEach(function(p, i) {
+    p.classList.toggle('active', i === idx);
+  });
+  var pct = (idx / (dcaAmounts.length - 1)) * 100;
+  var fill = document.getElementById('dca-slider-fill');
+  var thumb = document.getElementById('dca-slider-thumb');
+  if (fill) fill.style.width = pct + '%';
+  if (thumb) thumb.style.left = 'calc(' + pct + '% - 10px)';
+  var formatted = fmtBR(val);
+  var amtNum = document.getElementById('dca-amount-num');
+  if (amtNum) amtNum.textContent = formatted;
+  var topVal = document.getElementById('dca-top-val');
+  if (topVal) topVal.textContent = formatted;
+  var ratio = val / 50;
+  dcaBaseProj.forEach(function(p, i) {
+    var satsEl = document.getElementById('proj-sats-' + i);
+    var btcEl = document.getElementById('proj-btc-' + i);
+    if (satsEl) satsEl.textContent = fmtSats(p.sats * ratio);
+    if (btcEl) btcEl.textContent = (p.btc * ratio).toFixed(5);
+  });
+}
+function dcaSliderClick(e) {
+  var track = document.getElementById('dca-slider-track');
+  var rect = track.getBoundingClientRect();
+  var pct = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+  var idx = Math.round(pct * (dcaAmounts.length - 1));
+  var el = document.querySelectorAll('#screen-dca .preset')[idx];
+  selectDcaPreset(idx, el);
 }
 
 function navStep(delta) {
@@ -3767,7 +3917,6 @@ function initNav() {
   var navItemMap = {
     'Poupanca': 'dashboard',
     'Aprender': 'learn',
-    'Recompensas': 'niveis',
     'Enviar': 'enviar',
     'Atividade': 'atividade'
   };
